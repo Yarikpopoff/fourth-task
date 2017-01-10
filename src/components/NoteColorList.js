@@ -1,11 +1,13 @@
-var React = require('react');
-var NoteColorListCircle = require('./NoteColorListCircle.jsx');
+import React from 'react';
+import  NoteColorListCircle from './NoteColorListCircle';
 
 require('./style.css');
 
-var NoteColorList = React.createClass({
+// var NoteColorList = React.createClass({
+export default class NoteColorList extends React.Component {
 
-    getInitialState: function() {
+    constructor() {
+        super();
 
         var NoteColors = [{
             color: 'yellow',
@@ -30,12 +32,12 @@ var NoteColorList = React.createClass({
             text: ''
         }];
 
-        return {
+        this.state = {
             color: NoteColors,
         };
-    },
+    }
 
-    handleChoiceColor: function(event) { 
+    handleChoiceColor=(event)=> {
 	    if (event.target.classList.contains('color-circles')) {
 	    	var newColor = event.target.style.backgroundColor;
     		var newNoteColors = this.state.color.map(function(el) {
@@ -47,9 +49,9 @@ var NoteColorList = React.createClass({
     		this.setState({ color: newNoteColors });
     		this.props.onNoteColorChangeByComponent(newColor);
 	    }
-    },
+    }
 
-    render: function() {
+    render() {
         return ( 
         	<div onClick={ this.handleChoiceColor }>
                	{
@@ -66,6 +68,6 @@ var NoteColorList = React.createClass({
 		    </div>
         );
     }
-});
+};
 
-module.exports = NoteColorList;
+//module.exports = NoteColorList;

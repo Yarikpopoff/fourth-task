@@ -1,9 +1,9 @@
-var React = require('react');
+import  React from 'react';
 
 require('./style.css');
-
-var Note = React.createClass({
-	render: function() {
+export default class Input extends React.Component {
+//var Note = React.createClass({
+    render() {
 		var style = { backgroundColor: this.props.color };
 		return (
 			<div className="note" style={style}> 
@@ -12,6 +12,6 @@ var Note = React.createClass({
 			</div>
 		);
 	}
-});
+};
 
-module.exports = Note;
+//module.exports = Note;

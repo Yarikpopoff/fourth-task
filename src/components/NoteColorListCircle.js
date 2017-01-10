@@ -1,10 +1,11 @@
-var React = require('react');
+import React from 'react';
 
 require('./style.css');
 
-var NoteColorListCircle = React.createClass({
+//var NoteColorListCircle = React.createClass({
+export default class NoteColorListCircle extends React.Component {
 
-    render: function() {
+    render() {
         return ( 
         	<div className="color-circles"
             	style = {{ backgroundColor: this.props.color }}>
@@ -12,6 +13,6 @@ var NoteColorListCircle = React.createClass({
             </div>
         );
     }
-});
+};
 
-module.exports = NoteColorListCircle;
+// module.exports = NoteColorListCircle;

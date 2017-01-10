@@ -1,12 +1,11 @@
-var React = require('react');
-var Note = require('./Note.jsx');
+import React from 'react';
+import Note from './Note';
 
 require('./style.css');
 
 
-var NotesGrid = React.createClass({
-			
-	componentDidMount: function() {
+export default class NotesGrid extends React.Component {
+	componentDidMount() {
 			
 		var grid = this.refs.grid;
 		this.msnry = new Masonry( grid, { 
@@ -14,17 +13,17 @@ var NotesGrid = React.createClass({
 			columnWidth: 200,
 			gutter: 10
 		});
-	},
+	}
 
-	componentDidUpdate: function(prevProps) {
+	componentDidUpdate(prevProps) {
 		
 		if (this.props.notes.length !== prevProps.notes.length) {
 			this.msnry.reloadItems();
 			this.msnry.layout();
 		}
-	},
+	}
 
-	render: function() {
+	render () {
 		var onNoteDelete = this.props.onNoteDelete;
 
 		return (
@@ -44,6 +43,6 @@ var NotesGrid = React.createClass({
 			</div>
 		);
 	}
-});
+};
 
-module.exports = NotesGrid;
+//module.exports = NotesGrid;

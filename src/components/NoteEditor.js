@@ -1,29 +1,31 @@
-var React = require('react');
-var NoteColorList = require('./NoteColorList.jsx');
+import React from 'react';
+import NoteColorList from './NoteColorList';
 
 require('./style.css');
 
-var NoteEditor = React.createClass({
-	getInitialState: function() {
-		return {
+//var NoteEditor = React.createClass({
+export default class NoteEditor extends React.Component {
+    constructor() {
+        super();
+		this.state = {
 			text: '',
 			color: 'yellow'
 		};
-	},
+	}
 	
-	handleTextChange: function(event) {
+	handleTextChange=(event) =>{
 		this.setState({ text: event.target.value });
-	},
+	}
 	
-	handleColorChange: function(event) {
+	handleColorChange=(event)=> {
 		this.setState({ color: event.target.value });
-	},
+	}
 
-	handleNoteColorChangeByComponent: function(newColor) {
+	handleNoteColorChangeByComponent=(newColor)=> {
 		this.setState({ color: newColor });
-	},
+	}
 
-	handleNoteAdd: function() {
+	handleNoteAdd=()=> {
 		var newNote = {
 			text: this.state.text,
 			color: this.state.color,
@@ -32,17 +34,17 @@ var NoteEditor = React.createClass({
 
 		this.props.onNoteAdd(newNote);
 		this.setState({ text: '' });
-	},
+	}
 
-	componentWillMount: function() {
+	componentWillMount() {
 				
-	},
+	}
 
-	componentDidMount: function() {
+	componentDidMount() {
 				
-	},
+	}
 
-	render: function() {
+	render() {
 		return (
 			<div className="note-editor">
 				<textarea 
@@ -60,6 +62,6 @@ var NoteEditor = React.createClass({
 			</div>
 		);
 	}
-});
+};
 
-module.exports = NoteEditor;
+//module.exports = NoteEditor;
