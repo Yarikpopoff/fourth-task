@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Alert } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 import { ListGroupItem } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 require('./CostContainer.css');
 
@@ -15,8 +16,8 @@ export default class CostContainer extends React.Component {
         };
     }
 
-    alertClicked(event) {
-        alert('You clicked the third ListGroupItem');
+    alertClicked() {
+        alert('You clicked the ListGroupItem');
     }
 
     render() {
@@ -26,11 +27,40 @@ export default class CostContainer extends React.Component {
         return (
             <div className="well wellStyles">
                 <Alert bsStyle={alertColor}>Total amount: {this.state.totalAmount}</Alert>
-                <ListGroup>
-                    <ListGroupItem >21/01/2017 Food -246.59</ListGroupItem>
-                    <ListGroupItem >21/01/2017 Salary 500.00</ListGroupItem>
-                    <ListGroupItem onClick={this.alertClicked}>21/01/2017 Rent -158.25</ListGroupItem>
-                </ListGroup>
+                <Table responsive>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>21/01/2017</td>
+                            <td>Food</td>
+                            <td>-246.59</td>
+                            <td><a href="#">&times;</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>21/01/2017</td>
+                            <td>Salary</td>
+                            <td>500</td>
+                            <td onClick={this.alertClicked}>&times;</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>21/01/2017</td>
+                            <td>Rent</td>
+                            <td>-158.25</td>
+                            <td>&times;</td>
+                        </tr>
+                    </tbody>
+                </Table>
                 <Button bsStyle="primary" block>Add new income or expense</Button>
             </div>
         )
