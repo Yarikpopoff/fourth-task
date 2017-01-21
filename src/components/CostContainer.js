@@ -16,8 +16,9 @@ export default class CostContainer extends React.Component {
         };
     }
 
-    alertClicked() {
-        alert('You clicked the ListGroupItem');
+    alertClicked(event) {
+        console.log('You clicked the Table');
+        console.log(event);
     }
 
     render() {
@@ -37,7 +38,7 @@ export default class CostContainer extends React.Component {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody onClick={this.alertClicked}>
                         <tr>
                             <td>1</td>
                             <td>21/01/2017</td>
@@ -50,7 +51,7 @@ export default class CostContainer extends React.Component {
                             <td>21/01/2017</td>
                             <td>Salary</td>
                             <td>500</td>
-                            <td onClick={this.alertClicked}>&times;</td>
+                            <td>&times;</td>
                         </tr>
                         <tr>
                             <td>3</td>
