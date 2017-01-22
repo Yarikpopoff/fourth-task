@@ -1,4 +1,14 @@
 .wellStyles {
     max-width: 400px; 
     margin: 0 auto 10px;
-};
+}
+
+.delRow {
+    cursor:pointer;
+}
+
+.delRow:hover {
+    cursor:pointer;
+    color: #a94442;
+    font-weight: bold;
+}
