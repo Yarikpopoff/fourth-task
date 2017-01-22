@@ -99,10 +99,31 @@ export default class CostContainer extends React.Component {
         });
     }
 
-	handleChange=(e)=> {
-		debugger;
-        // this.setState({newText: event.target.value});
+	handleChangeDescription(id, e) {
+		const newExpendituresArray = this.state.expendituresArray.map((el)=> {
+            if (el.id == id) {el.description = e.target.value};
+            return el;
+        });
+
+        this.setState({
+            expendituresArray: newExpendituresArray,
+            totalAmount: this.calcSum(newExpendituresArray),
+        });
 	}
+
+    handleChangeAmount(id, e) {
+        const newExpendituresArray = this.state.expendituresArray.map((el)=> {
+            if (el.id == id) {
+                el.amount = +e.target.value
+            };
+            return el;
+        });
+
+        this.setState({
+            expendituresArray: newExpendituresArray,
+            totalAmount: this.calcSum(newExpendituresArray),
+        });
+    }
 
     _updateLocalStorage=()=> {
 		let localExpendituresArray = JSON.stringify(this.state.expendituresArray);
@@ -138,8 +159,12 @@ export default class CostContainer extends React.Component {
                                 return (
                                     <tr key = { i }>
                                         <td>{el.date}</td>
-                                        <td><FormControl type="text" value={el.description} onChange={this.handleChange} /></td>
-                                        <td><FormControl type="text" defaultValue={el.amount} /></td>
+                                        <td><FormControl type="text" defaultValue={el.description} 
+                                            onChange={this.handleChangeDescription.bind(this, el.id)} />
+                                        </td>
+                                        <td><FormControl type="text" defaultValue={el.amount} 
+                                            onChange={this.handleChangeAmount.bind(this, el.id)} />
+                                        </td>
                                         <td className="delRow" onClick={this.pressDel.bind(null, el.id)}>&times;</td>
                                     </tr>
                                 )
