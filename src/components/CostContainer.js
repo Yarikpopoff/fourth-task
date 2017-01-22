@@ -42,28 +42,17 @@ export default class CostContainer extends React.Component {
     }
 
     componentWillMount() {
-		
-        const calcSum=(amount, arr)=> {
-            if (arr) {
-                const sum = arr.reduce((sum, el)=>{
-                    return sum + el.amount;
-                }, amount);
-                return (Math.round(sum * 100) / 100);
-            } else {
-                return 0;
-            }
-        }
 
         const localExpendituresArray = JSON.parse(localStorage.getItem('expendituresArray'));
         if (localExpendituresArray) {
             this.setState({ 
-                totalAmount: calcSum(this.state.totalAmount, localExpendituresArray), 
+                totalAmount: this.calcSum(localExpendituresArray), 
                 expendituresArray: localExpendituresArray 
             });
         } else {
             if (this.state.expendituresArray) {
                 this.setState({ 
-                    totalAmount: calcSum(this.state.totalAmount, this.state.expendituresArray) 
+                    totalAmount: this.calcSum(this.state.expendituresArray) 
                 });
             }
         };
@@ -73,9 +62,25 @@ export default class CostContainer extends React.Component {
         this._updateLocalStorage();
     }
 
-    pressDel=(e)=> {
-        console.log('You clicked the Del');
-        debugger;
+    calcSum=(arr)=> {
+        if (arr) {
+            const sum = arr.reduce((sum, el)=>{
+                return sum + el.amount;
+            }, 0);
+            return (Math.round(sum * 100) / 100);
+        } else {
+            return 0;
+        }
+    }
+    
+    pressDel=(id)=> {
+        let newExpendituresArray = this.state.expendituresArray.filter((row)=> {
+            return row.id !== id;
+        });
+        this.setState({
+            expendituresArray: newExpendituresArray,
+            totalAmount: this.calcSum(newExpendituresArray)
+        });
     }
 
     addNew=()=> {
@@ -83,11 +88,14 @@ export default class CostContainer extends React.Component {
             id: Math.random().toString().slice(-10),
             date: new Date().toLocaleDateString(),
             description: 'new',
-            amount: 0
+            amount: 10
         };
         let newExpendituresArray = this.state.expendituresArray.slice();
         newExpendituresArray.push(newRow);
-        this.setState({expendituresArray: newExpendituresArray});
+        this.setState({
+            expendituresArray: newExpendituresArray,
+            totalAmount: this.calcSum(newExpendituresArray),
+        });
     }
 
     _updateLocalStorage=()=> {
@@ -126,7 +134,7 @@ export default class CostContainer extends React.Component {
                                         <td>{el.date}</td>
                                         <td>{el.description}</td>
                                         <td>{el.amount}</td>
-                                        <td className="delRow" onClick={this.pressDel}>&times;</td>
+                                        <td className="delRow" onClick={this.pressDel.bind(null, el.id)}>&times;</td>
                                     </tr>
                                 )
                             })
