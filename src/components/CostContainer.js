@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Alert } from 'react-bootstrap';
 import { Table } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
 
 require('./CostContainer.css');
 
@@ -15,25 +16,25 @@ export default class CostContainer extends React.Component {
             expendituresArray1: [
                 {
                     id: 0,
-                    date: '22.01.2017', // toLocaleDateString()
+                    date: '21.01.2017', // toLocaleDateString()
                     description: 'Food',
                     amount: -246.59
                 },
                 {
                     id: 1,
-                    date: '22.01.2017',
+                    date: '21.01.2017',
                     description: 'Salary',
                     amount: 500.00
                 },
                 {
                     id: 2,
-                    date: '22.01.2017',
+                    date: '21.01.2017',
                     description: 'Rent',
                     amount: -158.25
                 },
                 {
                     id: 3,
-                    date: '22.01.2017',
+                    date: '21.01.2017',
                     description: 'kindergarten',
                     amount: -81.50
                 }
@@ -88,7 +89,7 @@ export default class CostContainer extends React.Component {
             id: Math.random().toString().slice(-10),
             date: new Date().toLocaleDateString(),
             description: 'new',
-            amount: 10
+            amount: 0
         };
         let newExpendituresArray = this.state.expendituresArray.slice();
         newExpendituresArray.push(newRow);
@@ -97,6 +98,11 @@ export default class CostContainer extends React.Component {
             totalAmount: this.calcSum(newExpendituresArray),
         });
     }
+
+	handleChange=(e)=> {
+		debugger;
+        // this.setState({newText: event.target.value});
+	}
 
     _updateLocalStorage=()=> {
 		let localExpendituresArray = JSON.stringify(this.state.expendituresArray);
@@ -132,8 +138,8 @@ export default class CostContainer extends React.Component {
                                 return (
                                     <tr key = { i }>
                                         <td>{el.date}</td>
-                                        <td>{el.description}</td>
-                                        <td>{el.amount}</td>
+                                        <td><FormControl type="text" value={el.description} onChange={this.handleChange} /></td>
+                                        <td><FormControl type="text" defaultValue={el.amount} /></td>
                                         <td className="delRow" onClick={this.pressDel.bind(null, el.id)}>&times;</td>
                                     </tr>
                                 )
