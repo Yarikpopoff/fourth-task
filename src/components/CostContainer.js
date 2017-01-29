@@ -88,7 +88,7 @@ export default class CostContainer extends React.Component {
         let newRow = {
             id: Math.random().toString().slice(-10),
             date: new Date().toLocaleDateString(),
-            description: 'new',
+            description: '',
             amount: 0
         };
         let newExpendituresArray = this.state.expendituresArray.slice();
@@ -159,10 +159,10 @@ export default class CostContainer extends React.Component {
                                 return (
                                     <tr key = { i }>
                                         <td>{el.date}</td>
-                                        <td><FormControl type="text" defaultValue={el.description} 
+                                        <td><FormControl type="text" value={el.description} placeholder="new"
                                             onChange={this.handleChangeDescription.bind(this, el.id)} />
                                         </td>
-                                        <td><FormControl type="text" defaultValue={el.amount} 
+                                        <td><FormControl type="text" value={el.amount} placeholder="0"
                                             onChange={this.handleChangeAmount.bind(this, el.id)} />
                                         </td>
                                         <td className="delRow" onClick={this.pressDel.bind(null, el.id)}>&times;</td>
